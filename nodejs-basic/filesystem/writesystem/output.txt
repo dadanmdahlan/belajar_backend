@@ -1,0 +1,4 @@
+ini merupakan text baris pertama !
+ini merupakan text baris kedua !
+ini merupakan text baris keiga !
+akhir dari writable stream
