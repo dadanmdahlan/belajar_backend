@@ -80,8 +80,7 @@ const getBooksHandler = (request, h) => {
   }
   /* query berdasarkan nilai parameter name, reading ,finished */
   const { name, reading, finished } = request.query;
-  if (name !== undefined) {
-    // books.filter((b) => b.name.toLowerCase().includes(name.toLowerCase()));
+  if (name) {
     return {
       status: 'success',
       data: {
@@ -94,18 +93,13 @@ const getBooksHandler = (request, h) => {
         })),
       },
     };
-  } if (reading !== undefined) {
-    // books.filter((b) => b.reading === (reading === '1'));
-    if (reading === 1) {
-      reading = true;
-    } else if (reading === 0) {
-      reading = false;
-    }
-    return {
+  }
+  if (reading) {
+      return {
       status: 'success',
       data: {
         books: books
-          .filter(({ reading}) => reading)
+          .filter((b) => b.reading === (reading === '1'))
           .map((b) => ({
           id: b.id,
           name: b.name,
@@ -113,13 +107,13 @@ const getBooksHandler = (request, h) => {
         })),
       },
     };
-  } if (finished !== undefined) {
-    // books.filter((b) => b.finished === (finished === '1'));
+  }
+  if (finished) {
     return {
       status: 'success',
       data: {
         books: books
-        .filter((b) => b.finished === Boolean(finished))
+        .filter((b) => b.finished === (finished === '1'))
         .map((b) => ({
           id: b.id,
           name: b.name,
